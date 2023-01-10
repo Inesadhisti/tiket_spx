@@ -1,6 +1,0 @@
-{
-    "minimum-stability": "dev",
-    "require": {
-        "mpdf/mpdf": "@dev"
-    }
-}
