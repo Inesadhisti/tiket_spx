@@ -52,11 +52,11 @@ window.onload=function(){
 		  <div class="col-xs-12 col-sm-12 col-md-10">
 		  <ol class="breadcrumb">
 			  <li><a href="index.php"><span class="fa fa-home"></span> Beranda</a></li>
-			  <li><a href="tiket.php"><span class="fa fa-gears"></span> Data Tiket</a></li>
-			  <li class="active"><span class="fa fa-pencil"></span> Ubah Data Tiket</li>
+			  <li><a href="request.php"><span class="fa fa-gears"></span> Data Request Servis</a></li>
+			  <li class="active"><span class="fa fa-pencil"></span> Ubah Data Request Servis</li>
 			</ol>
 		  	<p style="margin-bottom:10px;">
-		  		<strong style="font-size:18pt;"><span class="fa fa-pencil"></span> Ubah Data Tiket</strong>
+		  		<strong style="font-size:18pt;"><span class="fa fa-pencil"></span> Ubah Data Request Revis</strong>
 		  	</p>
 		  	<div class="panel panel-default">
 		<div class="panel-body">
@@ -132,7 +132,7 @@ window.onload=function(){
 
 				
 				  <button type="submit" class="btn btn-warning"><span class="fa fa-edit"></span> Ubah</button>
-				  <button type="button" onclick="location.href='tiket.php'" class="btn btn-success"><span class="fa fa-history"></span> Kembali</button>
+				  <button type="button" onclick="location.href='request.php'" class="btn btn-success"><span class="fa fa-history"></span> Kembali</button>
 				</form>
 			 
 
