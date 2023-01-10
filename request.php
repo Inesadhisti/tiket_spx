@@ -71,18 +71,18 @@ if(isset($_POST['hapus-contengan'])){
                 <th style="vertical-align:middle;">Nopol</th>
                 <th style="vertical-align:middle;">Tipe Unit</th>
                 <th style="vertical-align:middle;">Nama Driver</th>
-
+                <th style="vertical-align:middle;">Nama Mekanik</th>
 
              
 
                 <th style="vertical-align:middle;">KM Unit</th>
                 <th style="vertical-align:middle;">Keluhan</th>
                   <th style="vertical-align:middle;">Tanggal Pengajuan</th>             
+                <th style="vertical-align:middle;">Status</th>
 
 
 
-
-                <th style="vertical-align:middle;" width="40px">Aksi</th>
+                <th style="vertical-align:middle;" width="70px">Aksi</th>
             </tr>
 			
         </thead>
@@ -101,17 +101,19 @@ if(isset($_POST['hapus-contengan'])){
             <td style="vertical-align:center;"><?php echo $row['nopol'] ?></td>   
             <td style="vertical-align:center;"><?php echo $row['tipe_unit'] ?></td>
             <td style="vertical-align:center;"><?php echo $row['nama_driver'] ?></td> 
-
+            <td style="vertical-align:center;"><?php echo $row['nama_mekanik'] ?></td>
             <td style="vertical-align:center;"><?php echo $row['km_unit'] ?></td>
             <td style="vertical-align:center;"><?php echo $row['keluhan'] ?></td>
 
 <td style="vertical-align:center;"><?php echo $row['tanggal_pengajuan'] ?></td>
+            <td style="vertical-align:center;"><?php echo $row['status'] ?></td>
 
 
 
 
             <td class="text-center" style="vertical-align:middle;">
 
+                <a href="request-ubah.php?id=<?php echo $row['no_request'] ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                 
     		  <a href="request-hapus.php?id=<?php echo $row['no_request'] ?>" onclick="return confirm('Yakin ingin menghapus data?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
     	    </td>

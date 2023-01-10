@@ -8,12 +8,12 @@ if($_POST){
 	$eks->nopol = $_POST['nopol'];
 	$eks->tipe_unit = $_POST['tipe_unit'];
 	$eks->nama_driver = $_POST['nama_driver'];
-	#$eks->nama_mekanik = $_POST['nama_mekanik'];
+	$eks->nama_mekanik = $_POST['nama_mekanik'];
 	$eks->km_unit = $_POST['km_unit'];
 	$eks->keluhan = $_POST['keluhan'];
 	$eks->tanggal_pengajuan = $_POST['tanggal_pengajuan'];	
 	#$eks->tanggal_servis = $_POST['tanggal_servis'];
-	#$eks->status = $_POST['status'];
+	$eks->status = $_POST['status'];
 
 	
 	if($eks->insert()){
@@ -83,6 +83,26 @@ window.onload=function(){
 				    <input type="text" class="form-control" id="nama_driver" name="nama_driver"  required oninvalid="this.setCustomValidity('Nama driver tidak boleh kosong')" oninput="setCustomValidity('')" >
 				</div>
 
+				   <div class="form-group">
+				    <label for="nama_mekanik">Nama Mekanik (Pilih: None)</label>
+				    <select class="form-control" id="nama_mekanik" name="nama_mekanik">
+					<?php
+					$conn = mysqli_connect("localhost", "root", "", "tiket_spx");
+					$result = mysqli_query($conn, "SELECT * FROM mekanik");
+					print_r($result);
+					?>
+					<?php
+					$i = 0;
+					while ($row = mysqli_fetch_array($result)) {
+					?>
+ 					<option value="<?= $row["nama_mekanik"]; ?>"><?= $row["nama_mekanik"]; ?></option>
+					<?php
+ 					$i++;
+					}
+					?>
+					</select>
+				  </div>
+
 
 
 				<div class="form-group">
@@ -100,6 +120,15 @@ window.onload=function(){
 				    <label for="tanggal_pengajuan">Tanggal Pengajuan (Contoh: 12-Apr-2023)</label>
 				    <input type="text" class="form-control" id="tanggal_pengajuan" name="tanggal_pengajuan"  required oninvalid="this.setCustomValidity('Tanggal tidak boleh kosong')" oninput="setCustomValidity('')" >
 				</div>
+
+					<div class="form-group">
+				    <label for="status">Status (Pilih: Open)</label>
+				    <select class="form-control" id="status" name="status" required>
+					<option value="Open">Open</option>
+					<option value="Closed">Closed</option>
+					<option value="Requested">Requested</option>
+
+					</select>
 
 
 

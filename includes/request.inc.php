@@ -9,12 +9,12 @@ class Request{
   public $nopol;
   public $tipe_unit;
   public $nama_driver;
-  #public $nama_mekanik;
+  public $nama_mekanik;
   public $km_unit;
   public $keluhan;
   public $tanggal_pengajuan;
   #public $tanggal_servis;
-  #public $status;
+  public $status;
   
   public function __construct($db){
     $this->conn = $db;
@@ -24,7 +24,7 @@ class Request{
  function insert(){
 		
 		
-		$query = "insert into ".$this->table_name." values('',?,?,?,?,?,?)";
+		$query = "insert into ".$this->table_name." values('',?,?,?,?,?,?,?,?)";
 		$stmt = $this->conn->prepare($query);
 
 
@@ -32,12 +32,12 @@ class Request{
 		$stmt->bindParam(1, $this->nopol);
 		$stmt->bindParam(2, $this->tipe_unit);
 		$stmt->bindParam(3, $this->nama_driver);
-		#$stmt->bindParam(4, $this->nama_mekanik);
-		$stmt->bindParam(4, $this->km_unit);
-		$stmt->bindParam(5, $this->keluhan);
-		$stmt->bindParam(6, $this->tanggal_pengajuan);		
+		$stmt->bindParam(4, $this->nama_mekanik);
+		$stmt->bindParam(5, $this->km_unit);
+		$stmt->bindParam(6, $this->keluhan);
+		$stmt->bindParam(7, $this->tanggal_pengajuan);		
 		#$stmt->bindParam(7, $this->tanggal_servis);
-		#$stmt->bindParam(8, $this->status);
+		$stmt->bindParam(8, $this->status);
 
 		#$stmt->bindParam(8, $this->id_sparepart);
 		#$stmt->bindParam(9, $this->id_pelanggan);
@@ -93,12 +93,12 @@ class Request{
 		$this->nopol = $row['nopol'];
 		$this->tipe_unit = $row['tipe_unit'];
 		$this->nama_driver = $row['nama_driver'];
-		#$this->nama_mekanik = $row['nama_mekanik'];
+		$this->nama_mekanik = $row['nama_mekanik'];
 		$this->km_unit = $row['km_unit'];
 		$this->keluhan = $row['keluhan'];
 				$this->tanggal_pengajuan = $row['tanggal_pengajuan'];
 		#$this->tanggal_servis = $row['tanggal_servis'];
-		#$this->status = $row['status'];
+		$this->status = $row['status'];
 
 	}
 	
@@ -112,10 +112,11 @@ class Request{
 					nopol= :nopol,
 					tipe_unit= :tipe_unit,
 					nama_driver= :nama_driver,
-					
+					nama_mekanik= :nama_mekanik,					
 					km_unit = :km_unit,
 					keluhan = :keluhan,	
-					tanggal_pengajuan = :tanggal_pengajuan		
+					tanggal_pengajuan = :tanggal_pengajuan,
+										status= :status		
 					
 					
 
@@ -129,7 +130,7 @@ class Request{
 		$stmt->bindParam(':nopol', $this->nopol);
 		$stmt->bindParam(':tipe_unit', $this->tipe_unit);
 		$stmt->bindParam(':nama_driver', $this->nama_driver);
-		#$stmt->bindParam(':nama_mekanik', $this->nama_mekanik);
+		$stmt->bindParam(':nama_mekanik', $this->nama_mekanik);
 		$stmt->bindParam(':km_unit', $this->km_unit);
 		$stmt->bindParam(':keluhan', $this->keluhan);
 				$stmt->bindParam(':tanggal_pengajuan', $this->tanggal_pengajuan);
@@ -139,7 +140,7 @@ class Request{
 		#$stmt->bindParam(':qty', $this->qty);
 		#$stmt->bindParam(':harga_jasa', $this->harga_jasa);
 		#$stmt->bindParam(':tanggal_servis', $this->tanggal_servis);
-		#$stmt->bindParam(':status', $this->status);
+		$stmt->bindParam(':status', $this->status);
 		$stmt->bindParam(':id', $this->id);
 		
 		// execute the query

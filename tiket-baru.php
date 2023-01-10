@@ -133,6 +133,7 @@ window.onload=function(){
 				    <select class="form-control" id="status" name="status" required>
 					<option value="Open">Open</option>
 					<option value="Closed">Closed</option>
+					<option value="Requested">Requested</option>
 
 					</select>
 <br>

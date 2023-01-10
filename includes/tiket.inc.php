@@ -56,12 +56,12 @@ class Tiket{
 	
 	function readAll(){
 
-	    $query = "SELECT * FROM tiket
+	    $query = "SELECT * FROM tiket 
 	              #JOIN mekanik ON tiket.nama_mekanik=mekanik.nama_mekanik     
 	                   
 	              #JOIN 213_pelanggan ON tiket.id_pelanggan=213_pelanggan.id_pelanggan
 		          #JOIN 213_sparepart ON tiket.id_sparepart=213_sparepart.id_sparepart
-		          #JOIN unit ON tiket.nopol=unit.nopol";
+		         ";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		
