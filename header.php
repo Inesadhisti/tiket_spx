@@ -2,7 +2,7 @@
 include "includes/config.php";
 session_start();
 if(!isset($_SESSION['nama_user'])){
-	echo "<script>location.href='login.php'</script>";
+	echo "<script>location.href='logout.php'</script>";
 }
 $config = new Config();
 $db = $config->getConnection();

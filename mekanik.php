@@ -1,5 +1,8 @@
 <?php  
 include "header.php";
+if ($_SESSION['tipe_user'] != 'admin') {
+    header("location: logout.php");
+}
 include_once 'includes/mekanik.inc.php';
 $pro = new Mekanik($db);
 $stmt = $pro->readAll();

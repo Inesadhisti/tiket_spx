@@ -1,6 +1,9 @@
 <?php  
 include "header.php";
 include_once 'includes/laporan.inc.php';
+if ($_SESSION['tipe_user'] != 'admin') {
+    header("location: logout.php");
+}
 $pro = new Tiket($db);
 $stmt = $pro->readAll();
 $count = $pro->countAll();

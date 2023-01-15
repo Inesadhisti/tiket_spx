@@ -9,6 +9,7 @@ class User{
 	public $nl;
 	public $un;
 	public $pw;
+	public $tu;
 	
 	public function __construct($db){
 		$this->conn = $db;
@@ -16,11 +17,12 @@ class User{
 	
 	function insert(){
 		
-		$query = "insert into ".$this->table_name." values('',?,?,?)";
+		$query = "insert into ".$this->table_name." values('',?,?,?,?)";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->nl);
 		$stmt->bindParam(2, $this->un);
 		$stmt->bindParam(3, $this->pw);
+		$stmt->bindParam(4, $this->tu);
 		
 		if($stmt->execute()){
 			return true;

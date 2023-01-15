@@ -21,6 +21,7 @@ class Login
             $_SESSION['nama_user'] = $user['nama_user'];
             $_SESSION['no_user'] = $user['no_user'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['tipe_user'] = $user['tipe_user'];
             return $user['username'];
         }
         return false;

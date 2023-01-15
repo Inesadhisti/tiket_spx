@@ -56,9 +56,7 @@ class Tiket{
 	
 	function readAll(){
 
-	    $query = "SELECT * FROM tiket 
-
-		         ";
+	    $query = "SELECT * FROM tiket WHERE status = 'Requested' OR status = 'Closed'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		

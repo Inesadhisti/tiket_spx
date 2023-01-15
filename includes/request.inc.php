@@ -1,30 +1,33 @@
 <?php
-class Request{
-  
-  private $conn;
-  private $table_name = "request";
+class Request
+{
+
+	private $conn;
+	private $table_name = "tiket";
 
 
-  public $id;
-  public $nopol;
-  public $tipe_unit;
-  public $nama_driver;
-  public $nama_mekanik;
-  public $km_unit;
-  public $keluhan;
-  public $tanggal_pengajuan;
-  #public $tanggal_servis;
-  public $status;
-  
-  public function __construct($db){
-    $this->conn = $db;
-  }
-  
-  
- function insert(){
-		
-		
-		$query = "insert into ".$this->table_name." values('',?,?,?,?,?,?,?,?)";
+	public $id;
+	public $nopol;
+	public $tipe_unit;
+	public $nama_driver;
+	public $nama_mekanik;
+	public $km_unit;
+	public $keluhan;
+	// public $tanggal_pengajuan;
+	public $tanggal_servis;
+	public $status;
+
+	public function __construct($db)
+	{
+		$this->conn = $db;
+	}
+
+
+	function insert()
+	{
+
+
+		$query = "insert into " . $this->table_name . " values('',?,?,?,?,?,?,?,?)";
 		$stmt = $this->conn->prepare($query);
 
 
@@ -35,7 +38,7 @@ class Request{
 		$stmt->bindParam(4, $this->nama_mekanik);
 		$stmt->bindParam(5, $this->km_unit);
 		$stmt->bindParam(6, $this->keluhan);
-		$stmt->bindParam(7, $this->tanggal_pengajuan);		
+		// $stmt->bindParam(7, $this->tanggal_pengajuan);
 		#$stmt->bindParam(7, $this->tanggal_servis);
 		$stmt->bindParam(8, $this->status);
 
@@ -45,65 +48,67 @@ class Request{
 		#stmt->bindParam(9, $this->harga_jasa);
 
 
-		
-		if($stmt->execute()){
+
+		if ($stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
-		
 	}
-	
-	
-	
-	function readAll(){
 
-	    $query = "SELECT * FROM request
+
+
+	function readAll()
+	{
+
+		$query = "SELECT * FROM tiket WHERE status = 'Open'
 	              #JOIN mekanik ON tiket.nama_mekanik=mekanik.nama_mekanik     
 	                   
 	              #JOIN 213_pelanggan ON tiket.id_pelanggan=213_pelanggan.id_pelanggan
 		          #JOIN 213_sparepart ON tiket.id_sparepart=213_sparepart.id_sparepart
 		          #JOIN unit ON tiket.nopol=unit.nopol";
-		$stmt = $this->conn->prepare( $query );
+		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
-		
+
 		return $stmt;
 	}
-	function readmen(){
+	function readmen()
+	{
 
 		$query = "select * from request";
-		$stmt = $this->conn->prepare( $query );
+		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
-		
+
 		return $stmt;
 	}
-	
-	// used when filling up the update product form
-	function readOne(){
-		
-		 $query = "SELECT * FROM " . $this->table_name . " WHERE no_request=?";
 
-		$stmt = $this->conn->prepare( $query );
+	// used when filling up the update product form
+	function readOne()
+	{
+
+		$query = "SELECT * FROM " . $this->table_name . " WHERE no_tiket=?";
+
+		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 		$stmt->execute();
 
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		
-		$this->id = $row['no_request'];
+
+		$this->id = $row['no_tiket'];
 		$this->nopol = $row['nopol'];
 		$this->tipe_unit = $row['tipe_unit'];
 		$this->nama_driver = $row['nama_driver'];
 		$this->nama_mekanik = $row['nama_mekanik'];
 		$this->km_unit = $row['km_unit'];
 		$this->keluhan = $row['keluhan'];
-				$this->tanggal_pengajuan = $row['tanggal_pengajuan'];
+		$this->tanggal_servis = $row['tanggal_servis'];
 		#$this->tanggal_servis = $row['tanggal_servis'];
 		$this->status = $row['status'];
-
 	}
-	
+
 	// update the product
-	function update(){
+	function update()
+	{
 
 		$query = "UPDATE 
 					" . $this->table_name . " 
@@ -115,14 +120,14 @@ class Request{
 					nama_mekanik= :nama_mekanik,					
 					km_unit = :km_unit,
 					keluhan = :keluhan,	
-					tanggal_pengajuan = :tanggal_pengajuan,
+					tanggal_servis = :tanggal_servis,
 										status= :status		
 					
 					
 
 
 				WHERE
-					no_request = :id";
+					no_tiket = :id";
 
 		$stmt = $this->conn->prepare($query);
 
@@ -133,7 +138,7 @@ class Request{
 		$stmt->bindParam(':nama_mekanik', $this->nama_mekanik);
 		$stmt->bindParam(':km_unit', $this->km_unit);
 		$stmt->bindParam(':keluhan', $this->keluhan);
-				$stmt->bindParam(':tanggal_pengajuan', $this->tanggal_pengajuan);
+		$stmt->bindParam(':tanggal_servis', $this->tanggal_servis);
 
 		#$stmt->bindParam(':nama', $this->nama);
 		#$stmt->bindParam(':sparepart', $this->sparepart);
@@ -142,30 +147,32 @@ class Request{
 		#$stmt->bindParam(':tanggal_servis', $this->tanggal_servis);
 		$stmt->bindParam(':status', $this->status);
 		$stmt->bindParam(':id', $this->id);
-		
+
 		// execute the query
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
+
 	// delete the product
-	function delete(){
-	
-		$query = "DELETE FROM " . $this->table_name . " WHERE no_request = ?";
-		
+	function delete()
+	{
+
+		$query = "DELETE FROM " . $this->table_name . " WHERE no_tiket = ?";
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 
-		if($result = $stmt->execute()){
+		if ($result = $stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	function countAll(){
+	function countAll()
+	{
 
 		$query = "SELECT * FROM request
 				 
@@ -173,22 +180,22 @@ class Request{
 		          #JOIN 213_pelanggan ON tiket.id_pelanggan=213_pelanggan.id_pelanggan
 		          #JOIN 213_sparepart ON tiket.id_sparepart=213_sparepart.id_sparepart
 		          #JOIN unit ON tiket.nopol=unit.nopol";
-		$stmt = $this->conn->prepare( $query );
+		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
-		
+
 		return $stmt->rowCount();
 	}
-	function hapusell($ax){
-	
-		$query = "DELETE FROM " . $this->table_name . " WHERE no_request in $ax";
-		
+	function hapusell($ax)
+	{
+
+		$query = "DELETE FROM " . $this->table_name . " WHERE no_tiket in $ax";
+
 		$stmt = $this->conn->prepare($query);
 
-		if($result = $stmt->execute()){
+		if ($result = $stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 }
-?>

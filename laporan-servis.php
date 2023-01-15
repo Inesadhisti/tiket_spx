@@ -1,7 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['nama_user'])) {
-	echo "<script>location.href='login.php'</script>";
+	echo "<script>location.href='logout.php'</script>";
+}
+if ($_SESSION['tipe_user'] != 'admin') {
+	header("location: logout.php");
 }
 // Define relative path from this script to mPDF
 $nama_dokumen = 'Laporan Servis'; //Beri nama file PDF hasil.

@@ -18,7 +18,7 @@ if($_POST){
 	$eks->nama_mekanik = $_POST['nama_mekanik'];
 	$eks->km_unit = $_POST['km_unit'];
 	$eks->keluhan = $_POST['keluhan'];
-	$eks->tanggal_pengajuan = $_POST['tanggal_pengajuan'];	
+	$eks->tanggal_servis = $_POST['tanggal_servis'];	
 	#$eks->tanggal_servis = $_POST['tanggal_servis'];
 	$eks->status = $_POST['status'];
 
@@ -118,7 +118,7 @@ window.onload=function(){
 				  </div>
 				  <div class="form-group">
 				    <label for="tanggal_servis">Tanggal Servis</label>
-				    <input type="text" class="form-control" id="tanggal_pengajuan" name="tanggal_pengajuan" value="<?php echo $eks->tanggal_pengajuan; ?>">
+				    <input type="text" class="form-control" id="tanggal_servis" name="tanggal_servis" value="<?php echo $eks->tanggal_servis; ?>">
 				  </div>
 				  <div class="form-group">
 				    <label for="status">Status</label>
